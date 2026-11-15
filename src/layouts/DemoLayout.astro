@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import { href, shop } from '../lib/site';
 import '../styles/demo.css';
 
@@ -36,11 +37,7 @@ const root = '/demo/sample-surf/';
   <main id="main">
     <slot />
   </main>
-  <footer class="d-footer">
-    <p class="d-footer-brand">SAMPLE<b>SURF</b> <span class="tag-demo">DEMO</span></p>
-    <p>{shop.name} は AUTO SITE のデモ用に作成した架空のサーフショップです。住所・電話番号・予約受付はありません。</p>
-    <p><a href={href('/')}>このようなサイトを作る（AUTO SITE について）</a></p>
-  </footer>
+  <SiteFooter brand="SAMPLE SURF" demo />
   <nav class="d-mobile-cta" aria-label="お問い合わせ（デモ）">
     <a href={href(`${root}#contact`)}>スクールのお問い合わせ</a>
     <a href={href(`${root}#access`)}>アクセス</a>
