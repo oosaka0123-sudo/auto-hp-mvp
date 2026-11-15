@@ -1,0 +1,52 @@
+name: Daily DEMO content
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: daily-demo
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - name: Generate next-morning DEMO content (rerun must be a no-op)
+        id: gen
+        run: |
+          first=$(npm run --silent generate)
+          echo "$first"
+          second=$(npm run --silent generate)
+          echo "$second" | grep -q '"status":"unchanged"' || { echo "Rerun was not idempotent"; exit 1; }
+          echo "result=$first" >> "$GITHUB_OUTPUT"
+      - run: npm run build
+      - run: npm run verify
+      - name: Run summary
+        env:
+          RESULT: ${{ steps.gen.outputs.result }}
+          AUTO_COMMIT: ${{ vars.DEMO_AUTO_COMMIT == 'true' }}
+        run: |
+          {
+            echo "### DEMO generation"
+            echo '```json'
+            echo "$RESULT"
+            echo '```'
+            echo "Commit enabled: $AUTO_COMMIT"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit generated DEMO data
+        if: vars.DEMO_AUTO_COMMIT == 'true'
+        run: |
+          git add src/data/waves
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git -c user.name="auto-site-bot" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "chore(demo): DEMO wave sample for next morning"
+          git push
