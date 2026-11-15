@@ -10,6 +10,10 @@ const latest = waveDays[0];
 <DemoLayout title="ホーム" description="AUTO SITE のデモ用に作成した架空のサーフショップ SAMPLE SURF のホームページ例です。スクール・ショップ・お知らせ・アクセスの構成見本で、波情報はすべてサンプルデータです。">
   <section class="d-hero d-hero--barrel" aria-label="海の世界へ">
     <div class="d-barrel-art" aria-hidden="true">
+      <video class="d-hero-video" autoplay muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true">
+        <source src={href('/assets/video/sample-surf-night.webm')} type="video/webm" />
+        <source src={href('/assets/video/sample-surf-night.mp4')} type="video/mp4" />
+      </video>
       <svg class="d-barrel-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="barrel-water" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#021726"/><stop offset=".33" stop-color="#075675"/><stop offset=".68" stop-color="#00b5c0"/><stop offset="1" stop-color="#8dfff1"/></linearGradient>
