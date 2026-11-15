@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: npm ci --no-audit --no-fund
+      - run: npm run check
+      - run: npm test
+      - name: Generate DEMO content twice and assert idempotency
+        run: |
+          npm run generate -- --date 2026-12-01
+          cp src/data/waves/2026-12-01.json /tmp/first.json
+          npm run generate -- --date 2026-12-01
+          cmp /tmp/first.json src/data/waves/2026-12-01.json
+          npm run generate
+      - run: npm run build
+      - run: npm run verify
