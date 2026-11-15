@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import Logo from '../components/Logo.astro';
 import { href, inquiryHref, site, yen } from '../lib/site';
 import '../styles/site.css';
 
@@ -62,7 +61,7 @@ const faqs = [
 <BaseLayout title={`${site.brand} — サーフショップのための自動更新ホームページ`} description={site.description}>
   <a class="skip" href="#main">本文へスキップ</a>
   <header class="s-header">
-    <a href={href('/')} class="s-brand" aria-label="AUTO SITE トップ"><Logo /></a>
+    <a href={href('/')} class="s-brand" aria-label="AUTO SITE トップ"><img src={href("/assets/brand/auto-site-logo.png")} alt="AUTO SITE" width="160" height="48" style="max-width:160px;height:auto;object-fit:contain" /></a>
     <nav aria-label="メイン">
       <a href="#how">しくみ</a>
       <a href="#pricing">料金</a>
