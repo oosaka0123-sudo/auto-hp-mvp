@@ -1,5 +1,7 @@
 ---
 import { href } from '../lib/site';
+import '../styles/master-integration.css';
+import '../master/ks-design.css';
 
 interface Props {
   title: string;
@@ -31,5 +33,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   </head>
   <body class={bodyClass}>
     <slot />
+    <script>
+      import { initKSDesign } from '../master/ks-motion.js';
+      import '../scripts/share.js';
+      initKSDesign(document);
+    </script>
   </body>
 </html>
