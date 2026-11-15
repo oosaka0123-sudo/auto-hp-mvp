@@ -1,0 +1,30 @@
+{
+  "name": "auto-hp-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AUTO SITE — subscription website MVP for surf shops (landing page + fictional SAMPLE SURF demo)",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "generate": "tsx scripts/generate-daily.ts",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && tsc --noEmit -p tsconfig.scripts.json",
+    "test": "tsx --test tests/generate.test.ts tests/config.test.ts",
+    "verify": "tsx scripts/verify-dist.ts",
+    "check:launch": "tsx scripts/check-launch.ts",
+    "ci": "npm run check && npm test && npm run generate && npm run build && npm run verify"
+  },
+  "dependencies": {
+    "astro": "^5.7.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

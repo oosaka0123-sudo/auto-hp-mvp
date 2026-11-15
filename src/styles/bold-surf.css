@@ -1,0 +1,28 @@
+/* Bold surf-brand art direction: saturated editorial surfaces, motion without video. */
+:root{--ks-neon:#ff5829;--ks-electric:#b8ff55}
+.hero{position:relative;background:radial-gradient(circle at 80% 20%,#ffcf5a 0,transparent 31%),linear-gradient(125deg,#f9e7cc 0%,#ffe2c4 44%,#ffb37e 100%);min-height:min(850px,95svh)}
+.hero::before{content:"SURF / CREATE / REPEAT";position:absolute;inset:auto -10% 3% auto;font-size:clamp(4rem,13vw,13rem);line-height:.8;letter-spacing:-.085em;font-weight:900;color:rgb(232 88 44 / .085);white-space:nowrap;pointer-events:none;transform:rotate(-8deg)}
+.hero-copy{position:relative;z-index:2}
+.hero-copy h1{font-size:clamp(3.1rem,7.6vw,8.6rem);line-height:1.1;letter-spacing:-.065em;text-wrap:balance}
+.hero-copy h1 em{color:#d94315;text-decoration:underline;text-decoration-thickness:.09em;text-underline-offset:.12em}
+.hero-contours{opacity:.7;animation:tide-drift 8s ease-in-out infinite}
+.hero-card{border:2px solid #102332;box-shadow:15px 15px 0 #102332;animation:gentle-float 5s ease-in-out infinite}
+.hero .btn-primary,.example .btn-primary{box-shadow:6px 6px 0 #102332;transition:transform .25s,box-shadow .25s}
+.hero .btn-primary:hover,.hero .btn-primary:focus-visible,.example .btn-primary:hover,.example .btn-primary:focus-visible{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #102332}
+.values,.example,.how,.pricing{position:relative;isolation:isolate}
+.section-title span{letter-spacing:.2em}
+.value-list>li,.plans>article{box-shadow:0 14px 30px rgb(14 34 51 / .06)}
+.value-list>li:hover,.plans>article:hover{box-shadow:9px 12px 0 rgb(232 88 44 / .35)}
+.d-hero{background:radial-gradient(circle at 78% 18%,#fff0a6 0,transparent 32%),linear-gradient(135deg,#fff6d8,#ffc770 55%,#ff8d67);min-height:min(780px,90svh)}
+.d-hero::before{content:"GOOD VIBES";position:absolute;top:8%;left:-4%;font-weight:900;letter-spacing:-.08em;font-size:clamp(5rem,16vw,17rem);line-height:1;color:rgb(8 79 82 / .085);white-space:nowrap;transform:rotate(-10deg);pointer-events:none}
+.d-hero-inner{position:relative;z-index:2}
+.d-hero-inner h1{font-size:clamp(3rem,7.5vw,8rem);line-height:1.12;letter-spacing:-.055em;text-wrap:balance}
+.d-hero-sun{filter:drop-shadow(0 0 40px rgb(255 185 35 / .45));animation:sun-breathe 5s ease-in-out infinite}
+.d-hero-sea{transform-origin:bottom;filter:drop-shadow(0 -10px 16px rgb(8 79 82 / .14))}
+.d-hero-sea path:first-child{animation:tide-swell 3.8s ease-in-out infinite}
+.d-hero-sea path:last-child{animation:tide-swell 5.4s ease-in-out infinite reverse}
+.d-btn{transition:transform .25s,box-shadow .25s}
+.d-btn:hover,.d-btn:focus-visible{transform:translateY(-4px);box-shadow:0 10px 0 rgb(8 79 82 / .25)}
+.d-courses>li:hover,.d-cards>li:hover,.d-products>li:hover{box-shadow:8px 10px 0 rgb(11 110 110 / .22)}
+@media(max-width:680px){.hero,.d-hero{min-height:auto}.hero-copy h1,.d-hero-inner h1{font-size:clamp(2.7rem,11vw,4.5rem)}.hero-card{box-shadow:7px 7px 0 #102332}.hero::before,.d-hero::before{font-size:20vw;opacity:.6}}
+@media(prefers-reduced-motion:reduce){.hero-contours,.hero-card,.d-hero-sun,.d-hero-sea path{animation:none!important}.hero .btn-primary,.example .btn-primary,.d-btn{transition:none!important}}

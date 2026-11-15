@@ -1,0 +1,59 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { href, shop } from '../lib/site';
+import '../styles/demo.css';
+import '../styles/cinematic-surf.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const root = '/demo/sample-surf/';
+---
+<BaseLayout title={`${title} | ${shop.name}（DEMO・架空の店舗）`} description={description} noindex bodyClass="demo">
+  <a class="d-skip" href="#main">本文へスキップ</a>
+  <div class="demo-banner" role="note">
+    <strong>DEMO</strong>
+    <span>架空の店舗「{shop.name}」のデモサイトです。掲載情報・波情報はすべてサンプルで、実在の店舗・観測・予報ではありません。</span>
+    <a href={href('/')}>AUTO SITE に戻る</a>
+  </div>
+  <header class="d-header d-header--cinematic">
+    <a class="d-brand" href={href(root)}>
+      <img src={href("/assets/brand/sample-surf-logo.png")} alt="SAMPLE SURF" width="160" height="48" style="max-width:160px;height:auto;object-fit:contain" />
+    </a>
+    <nav class="d-desktop-nav" aria-label="デモサイト">
+      <a href={href(`${root}#waves`)}>明日の朝の波</a>
+      <a href={href(`${root}#school`)}>スクール</a>
+      <a href={href(`${root}#shop`)}>ショップ</a>
+      <a href={href(`${root}news/`)}>お知らせ</a>
+      <a href={href(`${root}#access`)}>アクセス</a>
+    </nav>
+    <button type="button" class="d-menu-trigger" aria-expanded="false" aria-controls="surf-overlay" aria-label="メニューを開く"><span>MENU</span><span class="d-menu-trigger-icon" aria-hidden="true"><i></i><i></i></span></button>
+  </header>
+  <div id="surf-overlay" class="d-full-overlay" role="dialog" aria-modal="true" aria-label="SAMPLE SURF メニュー" aria-hidden="true" inert>
+    <div class="d-overlay-top"><span>SAMPLE SURF / EXPLORE</span><button type="button" class="d-overlay-close" aria-label="メニューを閉じる">CLOSE <span aria-hidden="true">×</span></button></div>
+    <nav aria-label="フルスクリーンメニュー" class="d-overlay-links">
+      <a href={href(root)}><span>01</span>HOME</a>
+      <a href={href(`${root}#waves`)}><span>02</span>WAVE REPORT</a>
+      <a href={href(`${root}#school`)}><span>03</span>SURF SCHOOL</a>
+      <a href={href(`${root}#shop`)}><span>04</span>SHOP & RENTAL</a>
+      <a href={href(`${root}news/`)}><span>05</span>NEWS</a>
+      <a href={href(`${root}#access`)}><span>06</span>ACCESS</a>
+      <a href={href(`${root}#contact`)}><span>07</span>CONTACT</a>
+    </nav>
+    <p class="d-overlay-foot">FIND YOUR LINE. FEEL THE OCEAN. <span>DEMO / FICTIONAL SHOP</span></p>
+  </div>
+  <main id="main">
+    <slot />
+  </main>
+  <SiteFooter brand="SAMPLE SURF" demo />
+  <nav class="d-mobile-cta" aria-label="お問い合わせ（デモ）">
+    <a href={href(`${root}#contact`)}>スクールのお問い合わせ</a>
+    <a href={href(`${root}#access`)}>アクセス</a>
+  </nav>
+  <script>
+    import '../scripts/surf-overlay.js';
+  </script>
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+import { href } from '../lib/site';
+interface Props { brand: string; demo?: boolean; }
+const { brand, demo = false } = Astro.props;
+const root = demo ? '/demo/sample-surf/' : '/';
+---
+<footer class="ks-site-footer" aria-label="サイト共通フッター">
+  <div class="ks-site-footer__inner">
+    <a class="ks-site-footer__brand" href={href(root)} aria-label={brand + ' トップページ'}>
+      <img src={href(demo ? '/assets/brand/sample-surf-logo.png' : '/assets/brand/auto-site-logo.png')} alt={brand} width="160" height="48" loading="lazy" />
+    </a>
+    <nav aria-label="フッターナビゲーション">
+      <a href={href(root)}>トップ</a>
+      <a href={href(demo ? '/demo/sample-surf/news/' : '/demo/sample-surf/')}>{demo ? 'お知らせ' : 'デモを見る'}</a>
+      {demo && <a href={href('/')}>AUTO SITE</a>}
+    </nav>
+    <button type="button" class="ks-share" data-ks-share>このページを共有</button>
+    <span class="ks-share-status" role="status" aria-live="polite" data-ks-share-status></span>
+    <small>powered by RSS7.ai Works</small>
+    {demo && <small>架空の店舗・デモデータです。実際の予約や問い合わせは受け付けません。</small>}
+  </div>
+</footer>

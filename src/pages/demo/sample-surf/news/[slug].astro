@@ -1,0 +1,22 @@
+---
+import DemoLayout from '../../../../layouts/DemoLayout.astro';
+import { formatDateJa, href, news, type NewsItem } from '../../../../lib/site';
+
+export function getStaticPaths() {
+  return news.map((item) => ({ params: { slug: item.slug }, props: { item } }));
+}
+
+interface Props {
+  item: NewsItem;
+}
+const { item } = Astro.props;
+---
+<DemoLayout title={item.title} description={`SAMPLE SURF（DEMO・架空の店舗）のお知らせ例：${item.title}`}>
+  <article class="d-section d-article">
+    <p class="d-crumb"><a href={href('/demo/sample-surf/news/')}>お知らせ</a> / {item.tag}</p>
+    <h1>{item.title}</h1>
+    <p class="d-meta"><span class="tag-demo">DEMO</span> <time datetime={item.date}>{formatDateJa(item.date)}</time></p>
+    {item.body.map((p) => <p>{p}</p>)}
+    <p><a class="d-more" href={href('/demo/sample-surf/news/')}>一覧に戻る</a></p>
+  </article>
+</DemoLayout>

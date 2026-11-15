@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "brand": "AUTO SITE",
+  "tagline": "サーフショップのための、毎日すこしずつ動くホームページ。",
+  "description": "サーフショップ（スクール・レンタル併設店を含む）専門のホームページ制作＋自動更新サブスクリプション。デモは架空の店舗とサンプルデータで構成しています。",
+  "inquiry": {
+    "_note": "Launch blocker: set email or formUrl before publishing. Empty values hide the CTA button instead of rendering a dead link. `npm run check:launch` fails while both are empty.",
+    "email": "",
+    "formUrl": ""
+  },
+  "plans": [
+    {
+      "id": "monitor",
+      "name": "モニタープラン",
+      "priceJpyMonthly": 9800,
+      "taxIncluded": true,
+      "slots": 3,
+      "note": "検証期間中のテスト提供価格です。募集枠・条件は予告なく変更・終了する場合があります。",
+      "features": ["ホームページ一式の制作", "お知らせ・営業情報の更新サポート", "自動更新セクション（データ提供元はご相談）", "改善のためのフィードバックへのご協力"]
+    },
+    {
+      "id": "regular",
+      "name": "通常プラン",
+      "priceJpyMonthly": 19800,
+      "taxIncluded": true,
+      "slots": null,
+      "note": "予定価格です。正式な条件はお申し込み前に書面でご案内します。",
+      "features": ["ホームページ一式の制作", "お知らせ・営業情報の更新サポート", "自動更新セクション（データ提供元はご相談）", "月1回の改善提案"]
+    }
+  ],
+  "setupFeeJpy": 0
+}

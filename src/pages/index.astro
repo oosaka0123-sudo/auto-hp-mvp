@@ -1,0 +1,224 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { href, inquiryHref, site, yen } from '../lib/site';
+import '../styles/site.css';
+
+const cta = inquiryHref();
+const ctaExternal = cta?.startsWith('https://') ?? false;
+
+const values = [
+  {
+    no: '01',
+    title: 'まず、ちゃんと見せられるホームページ',
+    body: 'スマホで見やすい構成、写真が映えるレイアウト、営業時間やスクール料金がすぐ分かる導線。お店の「顔」として恥ずかしくないサイトを最初に作ります。',
+  },
+  {
+    no: '02',
+    title: '更新は、毎日すこしずつ自動で',
+    body: '決まった時刻に、決まった形式の情報を自動でサイトに反映する仕組みを用意します。お知らせ更新もこちらでサポートします。',
+  },
+  {
+    no: '03',
+    title: '波の数字は、正直に扱う',
+    body: '実際の波情報を載せる場合は、商用利用が許諾されたデータ提供元を一緒に確認してから導入します。根拠のない「リアルタイム」表記はしません。',
+  },
+];
+
+const steps = [
+  { t: 'ヒアリング', d: 'お店の雰囲気・メニュー・載せたい情報をうかがいます。' },
+  { t: '制作・確認', d: 'デザイン案をお見せし、修正を重ねて公開準備をします。' },
+  { t: '公開・自動更新', d: '毎日17時ごろを目安に自動処理が走ります。サーバー側の都合で遅れる日もあります。' },
+];
+
+const faqs = [
+  {
+    q: 'サーフショップ以外のお店も申し込めますか？',
+    a: '現在はサーフショップ（スクール・レンタル併設店を含む）に絞って受け付けています。構成やデザインをサーフショップに特化させるためです。',
+  },
+  {
+    q: 'デモの波情報は本物ですか？',
+    a: 'いいえ。SAMPLE SURF は架空の店舗で、波の数値もプログラムで作ったサンプルです。実際の観測値・予報ではありません。',
+  },
+  {
+    q: '実際の波情報を自分のサイトに載せられますか？',
+    a: '可能性はありますが、データ提供元の利用規約（商用利用・再配布の可否）の確認が前提です。確認が取れるまでは、お店からの「今日の一言」など手入力の情報で運用する形をご提案します。',
+  },
+  {
+    q: 'モニタープランと通常プランの違いは？',
+    a: 'モニタープランはサービス検証のためのテスト提供価格で、3枠のみ募集します。改善のためのご意見をいただくことをお願いしています。内容・条件は正式なお申し込み前に書面でご案内します。',
+  },
+  {
+    q: '集客や検索順位は保証されますか？',
+    a: 'いいえ、保証はしていません。見やすく、情報が古くならないサイトづくりに集中します。',
+  },
+  {
+    q: '解約や契約期間はどうなりますか？',
+    a: '契約条件はまだ確定していません。お申し込み前に書面で明示し、ご納得いただいてからのスタートになります。',
+  },
+];
+---
+<BaseLayout title={`${site.brand} — サーフショップのための自動更新ホームページ`} description={site.description}>
+  <a class="skip" href="#main">本文へスキップ</a>
+  <header class="s-header">
+    <a href={href('/')} class="s-brand" aria-label="AUTO SITE トップ"><img src={href("/assets/brand/auto-site-logo.png")} alt="AUTO SITE" width="160" height="48" style="max-width:160px;height:auto;object-fit:contain" /></a>
+    <nav aria-label="メイン">
+      <a href="#how">しくみ</a>
+      <a href="#pricing">料金</a>
+      <a href="#faq">よくある質問</a>
+      <a class="s-nav-demo" href={href('/demo/sample-surf/')}>デモを見る</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" data-ks-hero>
+      <svg class="hero-contours" viewBox="0 0 800 600" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+        {Array.from({ length: 11 }, (_, i) => (
+          <path
+            d={`M-20 ${120 + i * 38} C 160 ${80 + i * 38}, 300 ${200 + i * 30}, 460 ${140 + i * 36} S 720 ${90 + i * 40}, 840 ${150 + i * 34}`}
+            fill="none"
+            stroke="currentColor"
+            stroke-width={i % 4 === 0 ? 1.6 : 0.8}
+          />
+        ))}
+      </svg>
+      <div class="hero-copy">
+        <p class="eyebrow"><span>FOR SURF SHOPS ONLY</span></p>
+        <h1>
+          波のように、<br />
+          <em>毎日すこしずつ</em><br />
+          動くホームページ。
+        </h1>
+        <p class="lead">
+          サーフショップ専門の、ホームページ制作と自動更新のサブスクリプションです。スクール・レンタル・物販・イベントの情報を、ひとつのサイトで分かりやすく。
+          月額 {yen(site.plans[0]!.priceJpyMonthly)}（税込・モニター価格）から、初期費用 {yen(site.setupFeeJpy)}。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={href('/demo/sample-surf/')}>デモサイトを見る</a>
+          <a class="btn btn-line" href="#pricing">料金を確認する</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="自動更新のイメージ">
+        <p class="hero-card-label"><span class="dot"></span>AUTO UPDATE · 17:00 JST 目安</p>
+        <dl>
+          <div><dt>対象</dt><dd>翌朝の情報セクション</dd></div>
+          <div><dt>方式</dt><dd>GitHub Actions による定時処理</dd></div>
+          <div><dt>デモのデータ</dt><dd>架空のサンプル（DEMO）</dd></div>
+        </dl>
+        <p class="hero-card-note">※ 定時処理は混雑時に遅れることがあります。</p>
+      </aside>
+    </section>
+
+    <section class="values" aria-labelledby="values-title">
+      <h2 id="values-title" class="section-title"><span>WHAT YOU GET</span>できること</h2>
+      <ol class="value-list">
+        {values.map((v) => (
+          <li>
+            <span class="value-no">{v.no}</span>
+            <h3>{v.title}</h3>
+            <p>{v.body}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="example" aria-labelledby="example-title">
+      <div class="example-copy">
+        <h2 id="example-title" class="section-title"><span>EXAMPLE</span>架空のお店で、完成形を見る</h2>
+        <p>
+          「SAMPLE SURF」は説明のために作った架空のサーフショップです。スクールのお問い合わせ導線、レンタル・修理、
+          おすすめ商品、お知らせ・イベント、アクセス、そして毎日自動で入れ替わる「明日の朝の波（サンプル）」セクションを実際に触って確認できます。
+        </p>
+        <a class="btn btn-primary" href={href('/demo/sample-surf/')}>SAMPLE SURF を開く</a>
+      </div>
+      <a class="example-mock" href={href('/demo/sample-surf/')} aria-label="SAMPLE SURF デモサイトを開く">
+        <svg viewBox="0 0 320 400" aria-hidden="true">
+          <rect x="1" y="1" width="318" height="398" rx="28" fill="#fff" stroke="#0e2233" stroke-width="2" />
+          <rect x="16" y="20" width="288" height="18" rx="6" fill="#e8582c" />
+          <text x="26" y="33" font-size="10" font-weight="700" fill="#fff" font-family="ui-monospace, monospace">DEMO · 架空の店舗</text>
+          <rect x="16" y="48" width="288" height="150" rx="16" fill="#fff4d6" />
+          <circle cx="250" cy="100" r="34" fill="#ffcf5a" />
+          <path d="M16 160c40-16 80-16 120 0s80 16 120 0 48-10 48-10v48H16z" fill="#0b6e6e" />
+          <rect x="32" y="72" width="140" height="14" rx="4" fill="#123" />
+          <rect x="32" y="94" width="100" height="10" rx="4" fill="#123" opacity=".4" />
+          <rect x="16" y="214" width="288" height="12" rx="4" fill="#123" opacity=".8" />
+          {[0, 1, 2, 3, 4].map((i) => (
+            <rect x={36 + i * 54} y={330 - [40, 62, 70, 54, 36][i]!} width="34" height={[40, 62, 70, 54, 36][i]} rx="6" fill="#0b6e6e" opacity={0.55 + i * 0.08} />
+          ))}
+          <line x1="24" x2="296" y1="330" y2="330" stroke="#123" stroke-opacity=".2" />
+          <rect x="16" y="350" width="200" height="10" rx="4" fill="#123" opacity=".3" />
+          <rect x="16" y="368" width="150" height="10" rx="4" fill="#123" opacity=".3" />
+        </svg>
+      </a>
+    </section>
+
+    <section id="how" class="how" aria-labelledby="how-title">
+      <h2 id="how-title" class="section-title"><span>HOW IT WORKS</span>しくみ</h2>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li>
+            <span class="step-no">STEP {i + 1}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="honest">
+        <h3>データの扱いについて</h3>
+        <p>
+          デモに表示している波の数値はすべて架空のサンプル（DEMO）です。実際の波情報を表示する場合は、
+          商用利用が認められたデータ提供元と、検証済みの取り込み手順が揃ってからご提案します。
+          また、自動処理が2回以上正常に動いたことを確認するまでは「無人運用」とは呼びません。
+        </p>
+      </div>
+    </section>
+
+    <section id="pricing" class="pricing" aria-labelledby="pricing-title">
+      <h2 id="pricing-title" class="section-title"><span>PRICING</span>料金（テスト提供中）</h2>
+      <p class="pricing-lead">初期費用 <strong>{yen(site.setupFeeJpy)}</strong>。価格は検証中のテスト提供条件で、変更になる場合があります。</p>
+      <div class="plans">
+        {site.plans.map((p) => (
+          <article class={`plan plan-${p.id}`}>
+            <header>
+              <h3>{p.name}</h3>
+              {p.slots && <p class="plan-slots">募集 {p.slots} 枠</p>}
+            </header>
+            <p class="plan-price">
+              {yen(p.priceJpyMonthly)}<span>/ 月（{p.taxIncluded ? '税込' : '税別'}）</span>
+            </p>
+            <ul>
+              {p.features.map((f) => <li>{f}</li>)}
+            </ul>
+            <p class="plan-note">{p.note}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="faq" class="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="section-title"><span>FAQ</span>よくある質問</h2>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">まずは、お店の話を聞かせてください。</h2>
+      <p>モニタープラン（3枠）のご相談、デモについてのご質問など、お気軽にどうぞ。営業目的の電話はおかけしません。</p>
+      {cta ? (
+        <a class="btn btn-invert" href={cta} {...(ctaExternal ? { target: '_blank', rel: 'noopener' } : {})}>
+          お問い合わせする
+        </a>
+      ) : (
+        <p class="contact-pending">お問い合わせ窓口は現在準備中です。</p>
+      )}
+    </section>
+  </main>
+
+  <SiteFooter brand="AUTO SITE" />
+</BaseLayout>

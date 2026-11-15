@@ -1,0 +1,45 @@
+/* Web Design Master: restrained, purposeful motion; CSS/SVG only, no media requests. */
+@keyframes tide-drift{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-1.8%,1.5%,0)}}
+@keyframes tide-swell{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(1.5%,-8px,0)}}
+@keyframes sun-breathe{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-9px,0) scale(1.045)}}
+@keyframes entrance-rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes gentle-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1deg)}}
+@keyframes line-sweep{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero{isolation:isolate;overflow:hidden}
+.hero-contours{animation:tide-drift 15s ease-in-out infinite;transform-origin:center;will-change:transform}
+.hero-copy .eyebrow{animation:entrance-rise .65s both}
+.hero-copy h1{animation:entrance-rise .85s .12s both}
+.hero-copy .lead{animation:entrance-rise .85s .25s both}
+.hero-actions{animation:entrance-rise .85s .38s both}
+.hero-card{animation:gentle-float 7s ease-in-out infinite}
+.example-mock{transition:transform .55s cubic-bezier(.22,1,.36,1),box-shadow .55s}
+.example-mock:hover,.example-mock:focus-visible{transform:translateY(-12px) rotate(1deg)}
+.value-list>li,.steps>li,.plans>article{transition:transform .35s ease,box-shadow .35s ease}
+.value-list>li:hover,.steps>li:hover,.plans>article:hover{transform:translateY(-5px)}
+.d-hero{isolation:isolate;overflow:hidden}
+.d-hero-sun{animation:sun-breathe 8s ease-in-out infinite;transform-origin:center}
+.d-hero-sea path:first-child{animation:tide-swell 6s ease-in-out infinite}
+.d-hero-sea path:last-child{animation:tide-swell 8s ease-in-out infinite reverse}
+.d-hero-inner .d-kicker{animation:entrance-rise .65s both}
+.d-hero-inner h1{animation:entrance-rise .85s .12s both}
+.d-hero-inner .d-lead{animation:entrance-rise .85s .24s both}
+.d-hero-inner .d-actions{animation:entrance-rise .85s .36s both}
+.d-courses>li,.d-cards>li,.d-products>li{transition:transform .35s ease,box-shadow .35s ease}
+.d-courses>li:hover,.d-cards>li:hover,.d-products>li:hover{transform:translateY(-6px)}
+/* Progressive enhancement: scroll reveals only in capable browsers. */
+@supports (animation-timeline:view()){
+  .value-list>li,.steps>li,.plans>article,.d-courses>li,.d-cards>li,.d-products>li{
+    animation:entrance-rise .7s both;
+    animation-timeline:view();
+    animation-range:entry 0% entry 75%;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-contours,.hero-copy .eyebrow,.hero-copy h1,.hero-copy .lead,.hero-actions,.hero-card,
+  .d-hero-sun,.d-hero-sea path,.d-hero-inner .d-kicker,.d-hero-inner h1,.d-hero-inner .d-lead,.d-hero-inner .d-actions,
+  .value-list>li,.steps>li,.plans>article,.d-courses>li,.d-cards>li,.d-products>li{
+    animation:none!important;transition:none!important;transform:none!important;opacity:1!important;
+  }
+  .example-mock{transition:none!important}
+  .example-mock:hover,.example-mock:focus-visible{transform:none}
+}

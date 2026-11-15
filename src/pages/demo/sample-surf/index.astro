@@ -1,0 +1,228 @@
+---
+import DemoLayout from '../../../layouts/DemoLayout.astro';
+import WaveOutlook from '../../../components/WaveOutlook.astro';
+import ProductIcon from '../../../components/ProductIcon.astro';
+import AccessMap from '../../../components/AccessMap.astro';
+import { formatDateJa, href, news, shop, waveDays } from '../../../lib/site';
+
+const latest = waveDays[0];
+---
+<DemoLayout title="ホーム" description="AUTO SITE のデモ用に作成した架空のサーフショップ SAMPLE SURF のホームページ例です。スクール・ショップ・お知らせ・アクセスの構成見本で、波情報はすべてサンプルデータです。">
+  <section class="d-hero d-hero--barrel" aria-label="海の世界へ">
+    <div class="d-barrel-art" aria-hidden="true">
+      <video class="d-hero-video" autoplay muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true">
+        <source src={href('/assets/video/sample-surf-night.webm')} type="video/webm" />
+        <source src={href('/assets/video/sample-surf-night.mp4')} type="video/mp4" />
+      </video>
+      <svg class="d-barrel-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="barrel-water" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#021726"/><stop offset=".33" stop-color="#075675"/><stop offset=".68" stop-color="#00b5c0"/><stop offset="1" stop-color="#8dfff1"/></linearGradient>
+          <radialGradient id="barrel-light"><stop stop-color="#e9fff3"/><stop offset=".4" stop-color="#65e9db"/><stop offset="1" stop-color="#006c88"/></radialGradient>
+          <linearGradient id="barrel-shade" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#00101e" stop-opacity=".96"/><stop offset=".55" stop-color="#00364a" stop-opacity=".24"/><stop offset="1" stop-color="#00101e" stop-opacity=".78"/></linearGradient>
+        </defs>
+        <rect width="1440" height="900" fill="url(#barrel-water)"/>
+        <ellipse class="d-barrel-glow" cx="1060" cy="420" rx="400" ry="290" fill="url(#barrel-light)"/>
+        <path class="d-barrel-crest" d="M-100 -100H1540V320C1210 40 970 60 790 235C630 405 640 650 830 750C490 690 310 520 240 300C150 100 20 60-100 80Z" fill="#003e59" opacity=".91"/>
+        <path class="d-barrel-foam" d="M-90 50C170 -40 400 70 560 260C690 425 660 600 850 744C640 700 485 630 390 475C270 280 170 180-90 240Z" fill="#3ef1e1" opacity=".46"/>
+        <path class="d-barrel-foam d-barrel-foam--two" d="M-90 190C170 120 310 300 410 480C540 700 720 790 1120 840L1450 900H-90Z" fill="#01283d" opacity=".85"/>
+        <path d="M0 780C250 720 430 810 700 770S1140 690 1440 780V900H0Z" fill="#012034" opacity=".78"/>
+        <g fill="none" stroke="#bafff4" stroke-width="4" opacity=".32"><path d="M-60 140C230 40 430 180 540 390"/><path d="M-70 180C210 95 390 230 480 415"/><path d="M-40 220C185 160 340 280 420 450"/></g>
+        <rect width="1440" height="900" fill="url(#barrel-shade)"/>
+      </svg>
+    </div>
+    <span class="d-hero-index" aria-hidden="true">01 / THE OCEAN</span>
+    <div class="d-hero-inner">
+      <p class="d-kicker">SAMPLE SURF / JAPAN / {shop.area}</p>
+      <h1 class="d-barrel-title">THE OCEAN<br /><em>IS CALLING.</em></h1>
+      <p class="d-lead">海に呼ばれる、その瞬間へ。<br />スクール・レンタル・ショップを体験する、架空のサーフショップデモ。</p>
+      <div class="d-actions">
+        <a class="d-btn" href={href('/demo/sample-surf/#contact')}>EXPLORE THE SHOP</a>
+        <a class="d-btn ghost" href={href('/demo/sample-surf/#waves')}>明日の朝の波（サンプル）</a>
+      </div>
+    </div>
+    <span class="d-scroll-indicator" aria-hidden="true">SCROLL TO EXPLORE <span>↓</span></span>
+    <svg class="d-hero-sun" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="90" fill="#ffcf5a" />
+    </svg>
+    <svg class="d-hero-sea" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 80c120-40 240-40 360 0s240 40 360 0 240-40 360 0 240 40 360 0v80H0z" fill="#0b6e6e" />
+      <path d="M0 110c120-30 240-30 360 0s240 30 360 0 240-30 360 0 240 30 360 0v50H0z" fill="#084f52" />
+    </svg>
+  </section>
+
+  <section id="waves" class="d-section" aria-labelledby="waves-title">
+    <div class="d-section-head">
+      <h2 id="waves-title">明日の朝の波 <span class="tag-demo">DEMO</span></h2>
+      <p>毎日夕方（17時ごろ目安）に自動で更新される「仕組み」のサンプルです。数値は架空のデータで、実際の海の状態とは関係ありません。</p>
+    </div>
+    {latest ? (
+      <WaveOutlook day={latest} />
+    ) : (
+      <p class="outlook-empty">サンプルデータはまだ生成されていません（<code>npm run generate</code> で生成されます）。</p>
+    )}
+    {waveDays.length > 1 && (
+      <details class="d-archive">
+        <summary>過去のサンプル（{waveDays.length - 1}件）</summary>
+        <ul>
+          {waveDays.slice(1).map((d) => (
+            <li>{formatDateJa(d.targetDate)}：{d.spots.map((s) => `${s.spotName} ${s.summary}`).join(' / ')}</li>
+          ))}
+        </ul>
+      </details>
+    )}
+  </section>
+
+  <section id="school" class="d-section alt" aria-labelledby="school-title">
+    <div class="d-section-head">
+      <p class="d-eyebrow">SURF SCHOOL</p>
+      <h2 id="school-title">サーフィンスクール</h2>
+      <p>{shop.school.lead}</p>
+    </div>
+    <ul class="d-courses">
+      {shop.school.courses.map((c) => (
+        <li>
+          <p class="d-course-level">{c.level}</p>
+          <h3>{c.name}</h3>
+          <p class="d-price">{c.price}<small>（税込・サンプル）</small></p>
+          <p class="d-course-time">所要 {c.duration}</p>
+          <ul class="d-chips">
+            {c.includes.map((i) => <li>{i}</li>)}
+          </ul>
+        </li>
+      ))}
+    </ul>
+    <ul class="d-notes">
+      {shop.school.notes.map((n) => <li>{n}</li>)}
+    </ul>
+    <p class="d-center"><a class="d-btn" href={href('/demo/sample-surf/#contact')}>スクールについて問い合わせる</a></p>
+  </section>
+
+  <section id="shop" class="d-section" aria-labelledby="shop-title">
+    <div class="d-section-head">
+      <p class="d-eyebrow">RENTAL &amp; REPAIR</p>
+      <h2 id="shop-title">レンタル・修理</h2>
+      <p>営業時間：{shop.hours}</p>
+    </div>
+    <ul class="d-cards">
+      {shop.services.map((s) => (
+        <li>
+          <h3>{s.name}</h3>
+          <p class="d-price">{s.price}<small>（サンプル）</small></p>
+          <p>{s.description}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="d-section-head d-sub">
+      <p class="d-eyebrow">PICK UP</p>
+      <h3 id="products-title">おすすめ商品</h3>
+      <p>価格・在庫はすべて架空のサンプルです。</p>
+    </div>
+    <ul class="d-products" aria-labelledby="products-title">
+      {shop.products.map((p) => (
+        <li>
+          <ProductIcon icon={p.icon} />
+          <p class="d-product-cat">{p.category}</p>
+          <h4>{p.name}</h4>
+          <p class="d-product-price">{p.price}</p>
+          <p class="d-product-note">{p.note}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="news" class="d-section alt" aria-labelledby="news-title">
+    <div class="d-split">
+      <div>
+        <div class="d-section-head">
+          <p class="d-eyebrow">NEWS</p>
+          <h2 id="news-title">お知らせ</h2>
+        </div>
+        <ul class="d-news">
+          {news.slice(0, 3).map((n) => (
+            <li>
+              <time datetime={n.date}>{n.date.replaceAll('-', '.')}</time>
+              <span class="d-news-tag">{n.tag}</span>
+              <a href={href(`/demo/sample-surf/news/${n.slug}/`)}>{n.title}</a>
+            </li>
+          ))}
+        </ul>
+        <p><a class="d-more" href={href('/demo/sample-surf/news/')}>お知らせ一覧へ</a></p>
+      </div>
+      <div>
+        <div class="d-section-head">
+          <p class="d-eyebrow">EVENTS</p>
+          <h2 id="events-title">イベント</h2>
+        </div>
+        <ul class="d-events" aria-labelledby="events-title">
+          {shop.events.map((e) => (
+            <li>
+              <p class="d-event-when">{e.schedule}</p>
+              <h3>{e.name}</h3>
+              <p>{e.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="access" class="d-section" aria-labelledby="access-title">
+    <div class="d-section-head">
+      <p class="d-eyebrow">ACCESS</p>
+      <h2 id="access-title">アクセス</h2>
+    </div>
+    <div class="d-access">
+      <AccessMap />
+      <dl class="d-access-list">
+        <div><dt>所在地</dt><dd>{shop.access.address}</dd></div>
+        <div>
+          <dt>交通</dt>
+          <dd>
+            <ul>{shop.access.transport.map((t) => <li>{t}</li>)}</ul>
+          </dd>
+        </div>
+        <div><dt>駐車場</dt><dd>{shop.access.parking}</dd></div>
+        <div><dt>営業時間</dt><dd>{shop.hours}</dd></div>
+      </dl>
+    </div>
+    <p class="d-access-note">{shop.access.note}</p>
+  </section>
+
+  <section id="contact" class="d-section d-contact" aria-labelledby="contact-title">
+    <div class="d-section-head">
+      <p class="d-eyebrow">CONTACT</p>
+      <h2 id="contact-title">スクールのお問い合わせ <span class="tag-demo">DEMO</span></h2>
+      <p>実際のサイトでは、ここからスクールの空き状況やレンタルの相談を受け付けます。このデモは架空の店舗のため、入力・送信はできません。</p>
+    </div>
+    <form class="d-form" aria-describedby="contact-demo-note">
+      <fieldset disabled>
+        <legend class="sr-only">お問い合わせフォームの見本（入力できません）</legend>
+        <label>
+          <span>ご希望のコース</span>
+          <select name="course">
+            {shop.school.courses.map((c) => <option value={c.id}>{c.name}</option>)}
+          </select>
+        </label>
+        <label>
+          <span>ご希望日</span>
+          <input type="text" name="date" placeholder="例：週末の午前" />
+        </label>
+        <label>
+          <span>お名前</span>
+          <input type="text" name="name" autocomplete="off" />
+        </label>
+        <label>
+          <span>ご質問</span>
+          <textarea name="message" rows="3" placeholder="身長・経験など"></textarea>
+        </label>
+        <button type="submit">送信（デモのため無効）</button>
+      </fieldset>
+    </form>
+    <p id="contact-demo-note" class="d-access-note">入力された情報はどこにも送信されません。SAMPLE SURF は架空の店舗です。</p>
+    <div class="d-contact-cta">
+      <p>このような問い合わせ導線のあるサイトを、あなたのサーフショップでも。</p>
+      <a class="d-btn" href={href('/#contact')}>AUTO SITE に相談する</a>
+    </div>
+  </section>
+</DemoLayout>
