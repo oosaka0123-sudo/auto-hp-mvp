@@ -20,11 +20,7 @@ const root = '/demo/sample-surf/';
   </div>
   <header class="d-header">
     <a class="d-brand" href={href(root)}>
-      <svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">
-        <circle cx="20" cy="20" r="19" fill="#ffcf5a" />
-        <path d="M4 25c5 0 5-4 10-4s5 4 10 4 5-4 10-4 3 2 3 2v8a17 17 0 0 1-33 0z" fill="#0b6e6e" />
-      </svg>
-      <span>SAMPLE<b>SURF</b></span>
+      <img src={href("/assets/brand/sample-surf-logo.png")} alt="SAMPLE SURF" width="160" height="48" style="max-width:160px;height:auto;object-fit:contain" />
     </a>
     <nav aria-label="デモサイト">
       <a href={href(`${root}#waves`)}>明日の朝の波</a>
