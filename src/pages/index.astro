@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import Logo from '../components/Logo.astro';
 import { href, inquiryHref, site, yen } from '../lib/site';
 import '../styles/site.css';
@@ -71,7 +72,7 @@ const faqs = [
   </header>
 
   <main id="main">
-    <section class="hero">
+    <section class="hero" data-ks-hero>
       <svg class="hero-contours" viewBox="0 0 800 600" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
         {Array.from({ length: 11 }, (_, i) => (
           <path
@@ -220,8 +221,5 @@ const faqs = [
     </section>
   </main>
 
-  <footer class="s-footer">
-    <Logo size={24} />
-    <p>AUTO SITE はサービス検証中のプロジェクトです。デモに登場する店舗・データはすべて架空です。</p>
-  </footer>
+  <SiteFooter brand="AUTO SITE" />
 </BaseLayout>
