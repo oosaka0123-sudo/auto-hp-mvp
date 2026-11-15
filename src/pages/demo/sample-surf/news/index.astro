@@ -1,0 +1,21 @@
+---
+import DemoLayout from '../../../../layouts/DemoLayout.astro';
+import { href, news } from '../../../../lib/site';
+---
+<DemoLayout title="お知らせ" description="架空のサーフショップ SAMPLE SURF（DEMO）のお知らせ一覧です。掲載内容はすべてサンプルです。">
+  <section class="d-section">
+    <div class="d-section-head">
+      <h1>お知らせ <span class="tag-demo">DEMO</span></h1>
+      <p>お店からのお知らせ一覧のサンプルです。</p>
+    </div>
+    <ul class="d-news">
+      {news.map((n) => (
+        <li>
+          <time datetime={n.date}>{n.date.replaceAll('-', '.')}</time>
+          <span class="d-news-tag">{n.tag}</span>
+          <a href={href(`/demo/sample-surf/news/${n.slug}/`)}>{n.title}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</DemoLayout>

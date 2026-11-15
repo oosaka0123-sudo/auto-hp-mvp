@@ -1,0 +1,55 @@
+---
+import type { DailyWaveFile } from '../lib/types';
+import { formatDateJa } from '../lib/site';
+
+interface Props {
+  day: DailyWaveFile;
+}
+const { day } = Astro.props;
+
+const W = 300;
+const H = 120;
+const MAX_M = 2;
+const barW = 36;
+const gap = (W - barW * 5) / 6;
+---
+<div class="outlook">
+  <p class="outlook-date">
+    <span class="tag-demo">DEMO</span>
+    {formatDateJa(day.targetDate)} 朝のサンプル
+  </p>
+  <div class="outlook-grid">
+    {day.spots.map((spot) => (
+      <article class="spot">
+        <h3>{spot.spotName}</h3>
+        <p class="spot-summary">{spot.summary}</p>
+        <svg viewBox={`0 0 ${W} ${H + 24}`} class="spot-chart" role="img" aria-label={`${spot.spotName}の波の高さサンプル（DEMO）`}>
+          <line x1="0" x2={W} y1={H} y2={H} stroke="currentColor" stroke-opacity=".25" />
+          {spot.slots.map((s, i) => {
+            const h = Math.max(4, (Math.min(s.heightM, MAX_M) / MAX_M) * (H - 18));
+            const x = gap + i * (barW + gap);
+            return (
+              <g>
+                <rect x={x} y={H - h} width={barW} height={h} rx="6" class={`bar r${s.rating}`} />
+                <text x={x + barW / 2} y={H - h - 6} text-anchor="middle" class="bar-val">{s.heightM}m</text>
+                <text x={x + barW / 2} y={H + 17} text-anchor="middle" class="bar-time">{s.time.slice(0, 2)}時</text>
+              </g>
+            );
+          })}
+        </svg>
+        <table class="spot-table">
+          <caption class="sr-only">{spot.spotName}の時間別サンプル値（DEMO）</caption>
+          <thead>
+            <tr><th scope="col">時刻</th><th scope="col">波高</th><th scope="col">周期</th><th scope="col">風</th></tr>
+          </thead>
+          <tbody>
+            {spot.slots.map((s) => (
+              <tr><th scope="row">{s.time}</th><td>{s.heightM}m</td><td>{s.periodS}秒</td><td>{s.windDir} {s.windMs}m/s</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </article>
+    ))}
+  </div>
+  <p class="outlook-disclaimer">{day.disclaimer}</p>
+</div>

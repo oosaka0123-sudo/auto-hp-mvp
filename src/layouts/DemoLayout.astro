@@ -1,0 +1,48 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { href, shop } from '../lib/site';
+import '../styles/demo.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const root = '/demo/sample-surf/';
+---
+<BaseLayout title={`${title} | ${shop.name}（DEMO・架空の店舗）`} description={description} noindex bodyClass="demo">
+  <a class="d-skip" href="#main">本文へスキップ</a>
+  <div class="demo-banner" role="note">
+    <strong>DEMO</strong>
+    <span>架空の店舗「{shop.name}」のデモサイトです。掲載情報・波情報はすべてサンプルで、実在の店舗・観測・予報ではありません。</span>
+    <a href={href('/')}>AUTO SITE に戻る</a>
+  </div>
+  <header class="d-header">
+    <a class="d-brand" href={href(root)}>
+      <svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#ffcf5a" />
+        <path d="M4 25c5 0 5-4 10-4s5 4 10 4 5-4 10-4 3 2 3 2v8a17 17 0 0 1-33 0z" fill="#0b6e6e" />
+      </svg>
+      <span>SAMPLE<b>SURF</b></span>
+    </a>
+    <nav aria-label="デモサイト">
+      <a href={href(`${root}#waves`)}>明日の朝の波</a>
+      <a href={href(`${root}#school`)}>スクール</a>
+      <a href={href(`${root}#shop`)}>ショップ</a>
+      <a href={href(`${root}news/`)}>お知らせ</a>
+      <a href={href(`${root}#access`)}>アクセス</a>
+    </nav>
+  </header>
+  <main id="main">
+    <slot />
+  </main>
+  <footer class="d-footer">
+    <p class="d-footer-brand">SAMPLE<b>SURF</b> <span class="tag-demo">DEMO</span></p>
+    <p>{shop.name} は AUTO SITE のデモ用に作成した架空のサーフショップです。住所・電話番号・予約受付はありません。</p>
+    <p><a href={href('/')}>このようなサイトを作る（AUTO SITE について）</a></p>
+  </footer>
+  <nav class="d-mobile-cta" aria-label="お問い合わせ（デモ）">
+    <a href={href(`${root}#contact`)}>スクールのお問い合わせ</a>
+    <a href={href(`${root}#access`)}>アクセス</a>
+  </nav>
+</BaseLayout>

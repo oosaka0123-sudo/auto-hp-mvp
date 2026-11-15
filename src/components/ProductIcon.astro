@@ -1,0 +1,40 @@
+---
+import type { ProductIcon } from '../lib/types';
+
+interface Props {
+  icon: ProductIcon;
+}
+const { icon } = Astro.props;
+---
+<svg class="p-icon" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+  <circle cx="60" cy="60" r="56" class="p-icon-bg" />
+  {icon === 'board' && (
+    <g>
+      <path d="M60 12c14 18 18 44 14 72-2 14-8 24-14 26-6-2-12-12-14-26-4-28 0-54 14-72z" fill="#fff" stroke="currentColor" stroke-width="3" />
+      <path d="M60 16v92" stroke="currentColor" stroke-width="2" stroke-dasharray="3 4" />
+      <path d="M53 96l7 10 7-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" />
+    </g>
+  )}
+  {icon === 'wetsuit' && (
+    <path
+      d="M46 18h28l4 10 14 8-6 30-8-2v40H42V64l-8 2-6-30 14-8z"
+      fill="#13262b"
+      stroke="currentColor"
+      stroke-width="3"
+      stroke-linejoin="round"
+    />
+  )}
+  {icon === 'fin' && (
+    <g fill="#fff" stroke="currentColor" stroke-width="3" stroke-linejoin="round">
+      <path d="M30 90c2-22 10-40 24-52 0 18 4 36 10 52z" />
+      <path d="M56 90c2-26 12-46 30-60-2 22 0 42 6 60z" />
+    </g>
+  )}
+  {icon === 'wax' && (
+    <g stroke="currentColor" stroke-width="3">
+      <rect x="32" y="40" width="56" height="44" rx="10" fill="#ffcf5a" />
+      <path d="M40 54h40M40 64h28" stroke-linecap="round" />
+      <path d="M44 40c4-8 28-8 32 0" fill="none" />
+    </g>
+  )}
+</svg>

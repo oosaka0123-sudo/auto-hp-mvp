@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "demo": true,
+  "source": "demo-generator",
+  "shopId": "sample-surf",
+  "targetDate": "2026-11-16",
+  "spots": [
+    {
+      "spotId": "north-point",
+      "spotName": "ノースポイント（架空）",
+      "slots": [
+        {
+          "time": "05:00",
+          "heightM": 1,
+          "periodS": 7,
+          "windDir": "南東",
+          "windMs": 4.1,
+          "rating": 3
+        },
+        {
+          "time": "06:00",
+          "heightM": 1.1,
+          "periodS": 7,
+          "windDir": "南東",
+          "windMs": 5.3,
+          "rating": 3
+        },
+        {
+          "time": "07:00",
+          "heightM": 1,
+          "periodS": 7,
+          "windDir": "南東",
+          "windMs": 5.8,
+          "rating": 3
+        },
+        {
+          "time": "08:00",
+          "heightM": 1.2,
+          "periodS": 7,
+          "windDir": "南",
+          "windMs": 6.1,
+          "rating": 4
+        },
+        {
+          "time": "09:00",
+          "heightM": 1.2,
+          "periodS": 7,
+          "windDir": "南",
+          "windMs": 7.4,
+          "rating": 3
+        }
+      ],
+      "summary": "しっかりめのサイズ感のイメージ（サンプル）"
+    },
+    {
+      "spotId": "river-mouth",
+      "spotName": "リバーマウス（架空）",
+      "slots": [
+        {
+          "time": "05:00",
+          "heightM": 1.1,
+          "periodS": 12,
+          "windDir": "南西",
+          "windMs": 6.7,
+          "rating": 3
+        },
+        {
+          "time": "06:00",
+          "heightM": 1.2,
+          "periodS": 12,
+          "windDir": "南西",
+          "windMs": 7.9,
+          "rating": 3
+        },
+        {
+          "time": "07:00",
+          "heightM": 1.2,
+          "periodS": 12,
+          "windDir": "南西",
+          "windMs": 7.7,
+          "rating": 3
+        },
+        {
+          "time": "08:00",
+          "heightM": 1.1,
+          "periodS": 12,
+          "windDir": "西",
+          "windMs": 8.4,
+          "rating": 2
+        },
+        {
+          "time": "09:00",
+          "heightM": 1.1,
+          "periodS": 12,
+          "windDir": "西",
+          "windMs": 9.1,
+          "rating": 2
+        }
+      ],
+      "summary": "ほどよいサイズ感のイメージ（サンプル）"
+    }
+  ],
+  "disclaimer": "DEMO：これは架空の店舗向けに自動生成したサンプルデータです。実際の観測値・予報ではありません。海に入る判断には使わないでください。"
+}

@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Logo from '../components/Logo.astro';
+import { href } from '../lib/site';
+import '../styles/site.css';
+---
+<BaseLayout title="ページが見つかりません | AUTO SITE" description="お探しのページは見つかりませんでした。AUTO SITE のトップページまたはデモサイトからお進みください。" noindex>
+  <main id="main" class="notfound">
+    <a href={href('/')} aria-label="AUTO SITE トップ"><Logo size={40} /></a>
+    <p class="notfound-code">404</p>
+    <h1>波に流されてしまったようです。</h1>
+    <p>お探しのページは見つかりませんでした。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href={href('/')}>トップへ戻る</a>
+      <a class="btn btn-line" href={href('/demo/sample-surf/')}>デモサイトを見る</a>
+    </div>
+  </main>
+</BaseLayout>
