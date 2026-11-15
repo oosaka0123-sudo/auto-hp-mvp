@@ -43,3 +43,11 @@
 @media(max-width:850px){.d-header--cinematic .d-desktop-nav{display:none}.d-hero--barrel .d-barrel-title{font-size:clamp(3.5rem,12vw,6.5rem)}}
 @media(max-width:520px){.demo .d-hero--barrel{min-height:90svh;padding:6rem 1.25rem 6rem}.d-hero--barrel .d-barrel-title{font-size:clamp(3.2rem,13.8vw,5.5rem)}.d-hero-index{display:none}.d-overlay-links a{font-size:clamp(2rem,9vw,3.4rem)}.d-overlay-foot{flex-direction:column}.d-menu-trigger{padding:.55rem .85rem}}
 @media(prefers-reduced-motion:reduce){.d-barrel-svg,.d-barrel-crest,.d-barrel-foam,.d-barrel-glow,.d-scroll-indicator span{animation:none!important}.d-full-overlay,.d-overlay-links a,.d-menu-trigger{transition:none!important}}
+
+/* Video overlays the SVG only after media becomes playable. */
+.d-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;z-index:1}
+.d-hero-video.is-ready{opacity:1}
+.d-barrel-art:has(.d-hero-video.is-ready) .d-barrel-svg{opacity:0}
+.d-barrel-svg{transition:opacity .5s ease}
+.d-hero--barrel .d-barrel-art{z-index:-2}
+@media(prefers-reduced-motion:reduce){.d-hero-video{display:none!important}}
