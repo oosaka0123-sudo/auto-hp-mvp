@@ -8,16 +8,35 @@ import { formatDateJa, href, news, shop, waveDays } from '../../../lib/site';
 const latest = waveDays[0];
 ---
 <DemoLayout title="ホーム" description="AUTO SITE のデモ用に作成した架空のサーフショップ SAMPLE SURF のホームページ例です。スクール・ショップ・お知らせ・アクセスの構成見本で、波情報はすべてサンプルデータです。">
-  <section class="d-hero">
+  <section class="d-hero d-hero--barrel" aria-label="海の世界へ">
+    <div class="d-barrel-art" aria-hidden="true">
+      <svg class="d-barrel-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="barrel-water" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#021726"/><stop offset=".33" stop-color="#075675"/><stop offset=".68" stop-color="#00b5c0"/><stop offset="1" stop-color="#8dfff1"/></linearGradient>
+          <radialGradient id="barrel-light"><stop stop-color="#e9fff3"/><stop offset=".4" stop-color="#65e9db"/><stop offset="1" stop-color="#006c88"/></radialGradient>
+          <linearGradient id="barrel-shade" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#00101e" stop-opacity=".96"/><stop offset=".55" stop-color="#00364a" stop-opacity=".24"/><stop offset="1" stop-color="#00101e" stop-opacity=".78"/></linearGradient>
+        </defs>
+        <rect width="1440" height="900" fill="url(#barrel-water)"/>
+        <ellipse class="d-barrel-glow" cx="1060" cy="420" rx="400" ry="290" fill="url(#barrel-light)"/>
+        <path class="d-barrel-crest" d="M-100 -100H1540V320C1210 40 970 60 790 235C630 405 640 650 830 750C490 690 310 520 240 300C150 100 20 60-100 80Z" fill="#003e59" opacity=".91"/>
+        <path class="d-barrel-foam" d="M-90 50C170 -40 400 70 560 260C690 425 660 600 850 744C640 700 485 630 390 475C270 280 170 180-90 240Z" fill="#3ef1e1" opacity=".46"/>
+        <path class="d-barrel-foam d-barrel-foam--two" d="M-90 190C170 120 310 300 410 480C540 700 720 790 1120 840L1450 900H-90Z" fill="#01283d" opacity=".85"/>
+        <path d="M0 780C250 720 430 810 700 770S1140 690 1440 780V900H0Z" fill="#012034" opacity=".78"/>
+        <g fill="none" stroke="#bafff4" stroke-width="4" opacity=".32"><path d="M-60 140C230 40 430 180 540 390"/><path d="M-70 180C210 95 390 230 480 415"/><path d="M-40 220C185 160 340 280 420 450"/></g>
+        <rect width="1440" height="900" fill="url(#barrel-shade)"/>
+      </svg>
+    </div>
+    <span class="d-hero-index" aria-hidden="true">01 / THE OCEAN</span>
     <div class="d-hero-inner">
-      <p class="d-kicker">{shop.area}</p>
-      <h1>{shop.tagline}</h1>
-      <p class="d-lead">スクール・レンタル・修理・物販の小さなサーフショップ、という設定のデモです。</p>
+      <p class="d-kicker">SAMPLE SURF / JAPAN / {shop.area}</p>
+      <h1 class="d-barrel-title">THE OCEAN<br /><em>IS CALLING.</em></h1>
+      <p class="d-lead">海に呼ばれる、その瞬間へ。<br />スクール・レンタル・ショップを体験する、架空のサーフショップデモ。</p>
       <div class="d-actions">
-        <a class="d-btn" href={href('/demo/sample-surf/#contact')}>スクールのお問い合わせ</a>
+        <a class="d-btn" href={href('/demo/sample-surf/#contact')}>EXPLORE THE SHOP</a>
         <a class="d-btn ghost" href={href('/demo/sample-surf/#waves')}>明日の朝の波（サンプル）</a>
       </div>
     </div>
+    <span class="d-scroll-indicator" aria-hidden="true">SCROLL TO EXPLORE <span>↓</span></span>
     <svg class="d-hero-sun" viewBox="0 0 200 200" aria-hidden="true">
       <circle cx="100" cy="100" r="90" fill="#ffcf5a" />
     </svg>
